@@ -1,4 +1,4 @@
-
+USE AdventureWorks2019
 ----------------------ЗАДАНИЕ №1-----------------------------
 --Вывести всю информацию из таблицы Sales.Customer 
 -------------------------------------------------------------
@@ -100,11 +100,5 @@ WHERE JobTitle = 'Sales Representative' OR JobTitle = 'Network Administrator' OR
 -------------------------------------------------------------
 
 SELECT *
-FROM HumanResources.Employee
-
-SELECT *
-FROM Purchasing.PurchaseOrderHeader
-
-SELECT *
 FROM HumanResources.Employee e
-FULL JOIN Purchasing.PurchaseOrderHeader p ON e.BusinessEntityID = p.EmployeeID
+LEFT JOIN Purchasing.PurchaseOrderHeader p ON e.BusinessEntityID = p.EmployeeID
