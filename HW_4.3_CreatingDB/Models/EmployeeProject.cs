@@ -11,7 +11,9 @@ namespace HW_4._3_CreatingDB.Models
         public int EmployeeProjectId { get; set; }
         public decimal Rate { get; set; }
         public DateTime StartedDate { get; set; }
-        public Employee EmployeeId { get; set; }
-        public Project ProjectId { get; set; }
+        public int EmployeeId { get; set; }
+        public Employee Employee { get; set; }
+        public int ProjectId { get; set; }
+        public Project Project { get; set; }
     }
 }

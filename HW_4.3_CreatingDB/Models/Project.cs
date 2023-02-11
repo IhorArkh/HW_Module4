@@ -12,5 +12,6 @@ namespace HW_4._3_CreatingDB.Models
         public string Name { get; set; }
         public decimal Budget { get; set; }
         public DateTime StartedDate { get; set; }
+        public List<EmployeeProject> EmployeeProject { get; set; } = new List<EmployeeProject>();
     }
 }

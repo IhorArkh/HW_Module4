@@ -11,5 +11,6 @@ namespace HW_4._3_CreatingDB.Models
         public int OfficeId { get; set; }
         public string Title { get; set; }
         public string Location { get; set; }
+        public Employee Employee { get; set; }
     }
 }
