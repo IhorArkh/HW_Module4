@@ -20,6 +20,11 @@ namespace HW_4._3_CreatingDB
 
         private string _connectionString;
 
+        public EmployeesContext(string connectionString = "Server=(localdb)\\mssqllocaldb;Database=MyFirstDb;Trusted_Connection=True")
+        {
+            _connectionString = connectionString;
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseSqlServer(_connectionString);
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
