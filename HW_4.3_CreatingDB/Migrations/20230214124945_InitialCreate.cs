@@ -124,14 +124,12 @@ namespace HW4._3CreatingDB.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Employees_OfficeId",
                 table: "Employees",
-                column: "OfficeId",
-                unique: true);
+                column: "OfficeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Employees_TitleId",
                 table: "Employees",
-                column: "TitleId",
-                unique: true);
+                column: "TitleId");
         }
 
         /// <inheritdoc />

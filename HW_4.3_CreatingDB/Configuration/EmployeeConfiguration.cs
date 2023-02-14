@@ -17,8 +17,8 @@ namespace HW_4._3_CreatingDB.Configuration
             builder.Property(x => x.FirstName).HasMaxLength(50);
             builder.Property(x => x.LastName).HasMaxLength(50);
             builder.Property(x => x.DateOfBirth).HasColumnType("date");
-            builder.HasOne(x => x.Office).WithOne(x => x.Employee).HasForeignKey<Employee>(x => x.OfficeId);
-            builder.HasOne(x => x.Title).WithOne(x => x.Employee).HasForeignKey<Employee>(x => x.TitleId);
+            builder.HasOne(x => x.Office).WithMany(x => x.Employee).HasForeignKey(x => x.OfficeId);
+            builder.HasOne(x => x.Title).WithMany(x => x.Employee).HasForeignKey(x => x.TitleId); 
         }
     }
 }

@@ -10,6 +10,6 @@ namespace HW_4._3_CreatingDB.Models
     {
         public int TitleId { get; set; }
         public string Name { get; set; }
-        public Employee Employee { get; set; }
+        public List<Employee> Employee { get; set; }
     }
 }

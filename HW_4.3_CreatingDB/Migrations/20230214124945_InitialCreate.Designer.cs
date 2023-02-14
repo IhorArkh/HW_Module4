@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HW4._3CreatingDB.Migrations
 {
     [DbContext(typeof(EmployeesContext))]
-    [Migration("20230212213145_InitialCreate")]
+    [Migration("20230214124945_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -57,11 +57,9 @@ namespace HW4._3CreatingDB.Migrations
 
                     b.HasKey("EmployeeId");
 
-                    b.HasIndex("OfficeId")
-                        .IsUnique();
+                    b.HasIndex("OfficeId");
 
-                    b.HasIndex("TitleId")
-                        .IsUnique();
+                    b.HasIndex("TitleId");
 
                     b.ToTable("Employees");
                 });
@@ -163,14 +161,14 @@ namespace HW4._3CreatingDB.Migrations
             modelBuilder.Entity("HW_4._3_CreatingDB.Models.Employee", b =>
                 {
                     b.HasOne("HW_4._3_CreatingDB.Models.Office", "Office")
-                        .WithOne("Employee")
-                        .HasForeignKey("HW_4._3_CreatingDB.Models.Employee", "OfficeId")
+                        .WithMany("Employee")
+                        .HasForeignKey("OfficeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("HW_4._3_CreatingDB.Models.Title", "Title")
-                        .WithOne("Employee")
-                        .HasForeignKey("HW_4._3_CreatingDB.Models.Employee", "TitleId")
+                        .WithMany("Employee")
+                        .HasForeignKey("TitleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -205,8 +203,7 @@ namespace HW4._3CreatingDB.Migrations
 
             modelBuilder.Entity("HW_4._3_CreatingDB.Models.Office", b =>
                 {
-                    b.Navigation("Employee")
-                        .IsRequired();
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("HW_4._3_CreatingDB.Models.Project", b =>
@@ -216,8 +213,7 @@ namespace HW4._3CreatingDB.Migrations
 
             modelBuilder.Entity("HW_4._3_CreatingDB.Models.Title", b =>
                 {
-                    b.Navigation("Employee")
-                        .IsRequired();
+                    b.Navigation("Employee");
                 });
 #pragma warning restore 612, 618
         }
