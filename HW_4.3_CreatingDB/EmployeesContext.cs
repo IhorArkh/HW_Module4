@@ -16,6 +16,7 @@ namespace HW_4._3_CreatingDB
         public DbSet<Office> Offices { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Title> Titles { get; set; }
+        public DbSet<Client> Clients { get; set; }
 
 
         private string _connectionString;
@@ -34,6 +35,7 @@ namespace HW_4._3_CreatingDB
             modelBuilder.ApplyConfiguration(new OfficeConfiguration());
             modelBuilder.ApplyConfiguration(new ProjectConfiguration());
             modelBuilder.ApplyConfiguration(new TitleConfiguration());
+            modelBuilder.ApplyConfiguration(new ClientConfiguration());
         }
     }
 }
