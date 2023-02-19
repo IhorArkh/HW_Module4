@@ -1,5 +1,6 @@
 ﻿using HW_4._3_CreatingDB.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace HW_4._3_CreatingDB
 {
@@ -27,7 +28,8 @@ namespace HW_4._3_CreatingDB
                                    };
 
                 //Запрос, который возвращает разницу между HiredDate и сегодня в днях. Фильтрация должна быть выполнена на сервере.
-                var employees = dbContext.Employees.AsNoTracking()
+                var employees = dbContext.Employees
+                    .AsNoTracking()
                     .Select(i => new { Id = i.EmployeeId, Diff = EF.Functions.DateDiffDay(i.HiredDate, DateTime.Now)});
 
                 //Запрос, который обновляет 2 сущности. Сделать в одной  транзакции
@@ -77,6 +79,7 @@ namespace HW_4._3_CreatingDB
 
                 //Запрос, который группирует сотрудников по ролям и возвращает название роли (Title) если оно не содержит ‘a’
                 var result = dbContext.Employees
+                    .AsNoTracking()
                     .Where(e => !e.Title.Name.Contains("a"))
                     .GroupBy(e => e.Title.Name)
                     .Select(e => e.Key); 
