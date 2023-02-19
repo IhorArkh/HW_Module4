@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HW_4._3_CreatingDB.Models
 {
-    internal class Client
+    public class Client
     {
         public int ClientId { get; set; }
         public virtual List<Project> Projects { get; set; }

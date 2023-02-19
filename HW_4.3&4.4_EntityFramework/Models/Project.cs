@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HW_4._3_CreatingDB.Models
 {
-    internal class Project
+    public class Project
     {
         public int ProjectId { get; set; }
         public string Name { get; set; }

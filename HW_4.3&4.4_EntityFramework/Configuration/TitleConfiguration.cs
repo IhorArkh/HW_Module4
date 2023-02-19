@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace HW_4._3_CreatingDB.Configuration
 {
-    internal class TitleConfiguration : IEntityTypeConfiguration<Title>
+    public class TitleConfiguration : IEntityTypeConfiguration<Title>
     {
         public void Configure(EntityTypeBuilder<Title> builder)
         {

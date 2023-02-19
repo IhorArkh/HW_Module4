@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HW_4._3_CreatingDB.Configuration
 {
-    internal class ProjectConfiguration : IEntityTypeConfiguration<Project>
+    public class ProjectConfiguration : IEntityTypeConfiguration<Project>
     {
         public void Configure(EntityTypeBuilder<Project> builder)
         {

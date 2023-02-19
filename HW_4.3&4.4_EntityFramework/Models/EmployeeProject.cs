@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HW_4._3_CreatingDB.Models
 {
-    internal class EmployeeProject
+    public class EmployeeProject
     {
         public int EmployeeProjectId { get; set; }
         public decimal Rate { get; set; }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HW_4._3_CreatingDB
 {
-    internal class EmployeesContext : DbContext
+    public class EmployeesContext : DbContext
     {
         public DbSet<Employee> Employees { get; set; }
         public DbSet<EmployeeProject> EmployeeProjects { get; set; }
