@@ -5,7 +5,6 @@ namespace HW_4._3_CreatingDB
 {
     internal class Program
     {
-
         static void Main(string[] args)
         {
             using(var dbContext = new EmployeesContext())
@@ -77,7 +76,10 @@ namespace HW_4._3_CreatingDB
                 dbContext.SaveChanges();
 
                 //Запрос, который группирует сотрудников по ролям и возвращает название роли (Title) если оно не содержит ‘a’
-                
+                var result = dbContext.Employees
+                    .Where(e => !e.Title.Name.Contains("a"))
+                    .GroupBy(e => e.Title.Name)
+                    .Select(e => e.Key); 
             }
         }
     }
