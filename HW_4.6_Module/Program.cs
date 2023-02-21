@@ -1,4 +1,7 @@
-﻿namespace HW_4._6_Module
+﻿using HW_4._3_CreatingDB.Models;
+using HW_4._6_Module.Models;
+
+namespace HW_4._6_Module
 {
     internal class Program
     {
