@@ -13,11 +13,13 @@ namespace HW_4._6_Module
             {
                 //Вывести название песни, имя исполнителя, название жанра песни.
                 //Вывести только песни у которых есть жанр и которые поет существующий(alive) исполнитель.
+
                 var sgs = dbContext.ArtistSongs
                     .AsNoTracking()
                     .Include(s => s.Song)
                     .ThenInclude(s => s.Genre)
                     .Include(s => s.Artist)
+                    .Where(s => s.Song.Genre != null)
                     .GroupBy(s => s.Song.Title);
 
                 foreach (var item in sgs)
