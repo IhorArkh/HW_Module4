@@ -1,6 +1,7 @@
 ﻿using HW_4._3_CreatingDB.Models;
 using HW_4._6_Module.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography.X509Certificates;
 
 namespace HW_4._6_Module
 {
@@ -12,18 +13,34 @@ namespace HW_4._6_Module
             {
                 //Вывести название песни, имя исполнителя, название жанра песни.
                 //Вывести только песни у которых есть жанр и которые поет существующий(alive) исполнитель.
-                var songs = dbContext.ArtistSongs
+                var sgs = dbContext.ArtistSongs
                     .AsNoTracking()
                     .Include(s => s.Song)
                     .ThenInclude(s => s.Genre)
                     .Include(s => s.Artist)
-                    .Where(s => s.Song.GenreId != null && s.Artist.DateOfDeath == null);
+                    .GroupBy(s => s.Song.Title);
 
-                Console.WriteLine("Song which has genre and artist is alive:");
-                foreach (var song in songs)
+                foreach (var item in sgs)
                 {
-                    Console.WriteLine($"{song.Song.Title} - {song.Artist.Name} - {song.Song.Genre.Title}");
+                    if (item.All(x => x.Artist.DateOfDeath == null))
+                    {
+                        Console.WriteLine($"{item.Key}");
+                    }
                 }
+                //cant display on console artist and genre, but works correctly
+
+                //var songs = dbContext.ArtistSongs
+                //    .AsNoTracking()
+                //    .Include(s => s.Song)
+                //    .ThenInclude(s => s.Genre)
+                //    .Include(s => s.Artist)
+                //    .Where(s => s.Song.GenreId != null && s.Artist.DateOfDeath == null);
+
+                //Console.WriteLine("Song which has genre and artist is alive:");
+                //foreach (var song in songs)
+                //{
+                //    Console.WriteLine($"{song.Song.Title} - {song.Artist.Name} - {song.Song.Genre.Title}");
+                //}
             }
 
             using (var dbContext = new DataBaseContext())

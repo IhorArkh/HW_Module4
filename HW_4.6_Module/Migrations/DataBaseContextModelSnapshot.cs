@@ -51,7 +51,7 @@ namespace HW_4._6_Module.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Artists");
+                    b.ToTable("Artists", (string)null);
 
                     b.HasData(
                         new
@@ -101,7 +101,7 @@ namespace HW_4._6_Module.Migrations
 
                     b.HasIndex("SongId");
 
-                    b.ToTable("ArtistSongs");
+                    b.ToTable("ArtistSongs", (string)null);
 
                     b.HasData(
                         new
@@ -150,7 +150,7 @@ namespace HW_4._6_Module.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genres");
+                    b.ToTable("Genres", (string)null);
 
                     b.HasData(
                         new
@@ -206,7 +206,7 @@ namespace HW_4._6_Module.Migrations
 
                     b.HasIndex("GenreId");
 
-                    b.ToTable("Songs");
+                    b.ToTable("Songs", (string)null);
 
                     b.HasData(
                         new
