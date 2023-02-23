@@ -13,7 +13,6 @@ namespace HW_4._6_Module
             {
                 //Вывести название песни, имя исполнителя, название жанра песни.
                 //Вывести только песни у которых есть жанр и которые поет существующий(alive) исполнитель.
-
                 var sgs = dbContext.ArtistSongs
                     .AsNoTracking()
                     .Include(s => s.Song)
@@ -50,14 +49,18 @@ namespace HW_4._6_Module
                 //Вывести кол-во песен в каждом жанре
                 var numOfSongsInGenre = dbContext.Songs
                     .AsNoTracking()
-                    .GroupBy(s => s.Genre.Title);
+                    .GroupBy(s => s.Genre.Title)
+                    .Select(x => new
+                    {
+                        Title = x.Key,
+                        NumOfSongs = x.Count()
+                    });
 
                 Console.WriteLine("\nNumber of songs in each genre:");
                 foreach (var item in numOfSongsInGenre)
                 {
-                    Console.WriteLine($"{item.Key}  - {item.Count()}");
+                    Console.WriteLine($"{item.Title} - {item.NumOfSongs}");
                 }
-                Console.WriteLine();
             }
 
             using(var dbContext = new DataBaseContext())
@@ -69,12 +72,16 @@ namespace HW_4._6_Module
 
                 var songs = dbContext.Songs
                     .AsNoTracking()
-                    .Where(s => s.RealeasedDate < youngestArtistBirth);
+                    .Where(s => s.RealeasedDate < youngestArtistBirth)
+                    .Select(x => new
+                    {
+                        SongTitle = x.Title
+                    });
 
-                Console.WriteLine($"Songs released before youngest artist was born ({youngestArtistBirth.ToShortDateString()}):");
-                foreach (var song in songs)
+                Console.WriteLine($"\nSongs released before youngest artist was born ({youngestArtistBirth.ToShortDateString()}):");
+                foreach (var item in songs)
                 {
-                    Console.WriteLine(song.Title);
+                    Console.WriteLine(item.SongTitle);
                 }
             }
         }
