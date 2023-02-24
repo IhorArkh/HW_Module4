@@ -13,41 +13,30 @@ namespace HW_4._6_Module
             {
                 //Вывести название песни, имя исполнителя, название жанра песни.
                 //Вывести только песни у которых есть жанр и которые поет существующий(alive) исполнитель.
-                var sgs = dbContext.ArtistSongs
+                var firstQuery = dbContext.ArtistSongs
                     .AsNoTracking()
                     .Include(s => s.Song)
                     .ThenInclude(s => s.Genre)
                     .Include(s => s.Artist)
-                    .Where(s => s.Song.Genre != null)
-                    .GroupBy(s => s.Song.Title);
-
-                foreach (var item in sgs)
-                {
-                    if (item.All(x => x.Artist.DateOfDeath == null))
+                    .Where(s => s.Song.GenreId != null && s.Artist.DateOfDeath == null)
+                    .Select(x => new
                     {
-                        Console.WriteLine($"{item.Key}");
-                    }
+                        SongName = x.Song.Title,
+                        ArtistName = x.Artist.Name,
+                        GenreName = x.Song.Genre.Title
+                    });
+
+                Console.WriteLine("Song which has genre and artist is alive:");
+                foreach (var item in firstQuery)
+                {
+                    Console.WriteLine($"{item.SongName} - {item.ArtistName} - {item.GenreName}");
                 }
-                //cant display on console artist and genre, but works correctly
-
-                //var songs = dbContext.ArtistSongs
-                //    .AsNoTracking()
-                //    .Include(s => s.Song)
-                //    .ThenInclude(s => s.Genre)
-                //    .Include(s => s.Artist)
-                //    .Where(s => s.Song.GenreId != null && s.Artist.DateOfDeath == null);
-
-                //Console.WriteLine("Song which has genre and artist is alive:");
-                //foreach (var song in songs)
-                //{
-                //    Console.WriteLine($"{song.Song.Title} - {song.Artist.Name} - {song.Song.Genre.Title}");
-                //}
             }
 
             using (var dbContext = new DataBaseContext())
             {
                 //Вывести кол-во песен в каждом жанре
-                var numOfSongsInGenre = dbContext.Songs
+                var secongQuery = dbContext.Songs
                     .AsNoTracking()
                     .GroupBy(s => s.Genre.Title)
                     .Select(x => new
@@ -57,7 +46,7 @@ namespace HW_4._6_Module
                     });
 
                 Console.WriteLine("\nNumber of songs in each genre:");
-                foreach (var item in numOfSongsInGenre)
+                foreach (var item in secongQuery)
                 {
                     Console.WriteLine($"{item.Title} - {item.NumOfSongs}");
                 }
@@ -66,20 +55,16 @@ namespace HW_4._6_Module
             using(var dbContext = new DataBaseContext())
             {
                 //Вывести песни, которые были написаны (ReleasedDate) до рождения самого молодого исполнителя.
-                var youngestArtistBirth = dbContext.Artists
+                var thirdQuery = dbContext.Songs
                     .AsNoTracking()
-                    .Max(a => a.DateOfBirth);
-
-                var songs = dbContext.Songs
-                    .AsNoTracking()
-                    .Where(s => s.RealeasedDate < youngestArtistBirth)
+                    .Where(s => s.RealeasedDate < dbContext.Artists.AsNoTracking().Max(a => a.DateOfBirth))
                     .Select(x => new
                     {
                         SongTitle = x.Title
                     });
 
-                Console.WriteLine($"\nSongs released before youngest artist was born ({youngestArtistBirth.ToShortDateString()}):");
-                foreach (var item in songs)
+                Console.WriteLine($"\nSongs released before youngest artist was born:");
+                foreach (var item in thirdQuery)
                 {
                     Console.WriteLine(item.SongTitle);
                 }

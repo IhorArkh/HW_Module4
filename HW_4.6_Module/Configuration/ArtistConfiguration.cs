@@ -17,42 +17,40 @@ namespace HW_4._6_Module.Configuration
             builder.HasKey(x => x.Id);
             builder.Property(x => x.DateOfBirth).HasColumnType("date");
             builder.Property(x => x.DateOfDeath).HasColumnType("date");
-
-            Artist fiftyCent = new Artist
+            builder.HasData(
+            new Artist
             {
                 Id = 1,
                 Name = "50 Cent",
                 DateOfBirth = new DateTime(1975, 7, 6),
                 Email = "50cent@gmail.com",
                 InstagramUrl = "www.instagram.com/50cent/",
-            };
-            Artist beyonce = new Artist
+            },
+            new Artist
             {
                 Id = 2,
                 Name = "Beyonce",
                 DateOfBirth = new DateTime(1981, 9, 4),
-            };
-            Artist akon = new Artist
+            },
+            new Artist
             {
                 Id = 3,
                 Name = "Akon",
                 DateOfBirth = new DateTime(1981, 9, 4),
-            };
-            Artist eminem = new Artist
+            },
+            new Artist
             {
                 Id = 4,
                 Name = "Eminem",
                 DateOfBirth = new DateTime(1972, 10, 17),
-            };
-            Artist liMorgan = new Artist
+            },
+            new Artist
             {
                 Id = 5,
                 Name = "Li Morgan",
                 DateOfBirth = new DateTime(1938, 7, 10),
                 DateOfDeath = new DateTime(1972, 2, 19),
-            };
-
-            builder.HasData(fiftyCent, beyonce, akon, eminem, liMorgan);
+            });
         }
     }
 }
